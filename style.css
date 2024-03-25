@@ -1,9 +1,14 @@
 body {
     background-color: lightblue;
+    min-width: 375;
 }
 
 canvas {
     background-color: white;
+}
+
+#canvas-ctn {
+    text-align: center;
 }
 
 #color > button {

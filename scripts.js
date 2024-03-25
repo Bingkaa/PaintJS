@@ -1,6 +1,6 @@
 var isDrawing = false;
 var c = document.getElementById("canvas");
-canvas = c.getContext("2d");
+var canvas = c.getContext("2d");
 var color = "black";
 
 // Styling for color buttons
@@ -15,11 +15,23 @@ for (let i = 0; i < colors.length; i++) {
 
 colors[1].classList.add('active');
 
+// Set canvas size based on window size
+function setCanvasSize() {
+    c.width = window.innerWidth * 0.9; // Adjust as needed
+    c.height = window.innerHeight * 0.6; // Adjust as needed
+}
+
 // Draw on Canvas
 function draw() {
+    setCanvasSize(); // Set initial canvas size
+    window.addEventListener("resize", setCanvasSize); // Update canvas size on window resize
+
     c.addEventListener("mousedown", startDrawing);
+    c.addEventListener("touchstart", startDrawing);
     c.addEventListener("mousemove", brush);
+    c.addEventListener("touchmove", brush);
     c.addEventListener("mouseup", endDrawing);
+    c.addEventListener("touchend", endDrawing);
 }
 
 function startDrawing(e) {
@@ -29,8 +41,14 @@ function startDrawing(e) {
 
 function brush(e) {
     if (!isDrawing) return;
-    var xPos = e.pageX - this.offsetLeft;
-    var yPos = e.pageY - this.offsetTop;
+    var xPos, yPos;
+    if (e.touches) {
+        xPos = e.touches[0].pageX - this.offsetLeft;
+        yPos = e.touches[0].pageY - this.offsetTop;
+    } else {
+        xPos = e.pageX - this.offsetLeft;
+        yPos = e.pageY - this.offsetTop;
+    }
 
     drawLine(lastX, lastY, xPos, yPos);
 
@@ -69,7 +87,7 @@ function changeColor(newColor) {
 }
 
 function clearCanvas() {
-    canvas.clearRect(0, 0, canvas.canvas.width, canvas.canvas.height);
+    canvas.clearRect(0, 0, c.width, c.height); // Clear the entire canvas
 }
 
 window.addEventListener("load", draw);
