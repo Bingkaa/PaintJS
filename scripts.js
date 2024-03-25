@@ -2,6 +2,7 @@ var isDrawing = false;
 var c = document.getElementById("canvas");
 var canvas = c.getContext("2d");
 var color = "black";
+var undo_stack = [];
 
 // Styling for color buttons
 var colors = document.getElementById("color").childNodes;
@@ -17,14 +18,14 @@ colors[1].classList.add('active');
 
 // Set canvas size based on window size
 function setCanvasSize() {
-    c.width = window.innerWidth * 0.9; // Adjust as needed
-    c.height = window.innerHeight * 0.6; // Adjust as needed
+    c.width = window.innerWidth * 0.9; 
+    c.height = window.innerHeight * 0.6; 
 }
 
 // Function to handle touch start
 function handleTouchStart(event) {
-    event.preventDefault(); // Prevent default touch behavior
-    startDrawing(event.touches[0]); // Pass the first touch event to startDrawing function
+    event.preventDefault(); 
+    startDrawing(event.touches[0]);
 }
 
 // Draw on Canvas
@@ -64,6 +65,7 @@ function brush(e) {
 
 function endDrawing() {
     isDrawing = false;
+    
 }
 
 function drawLine(x1, y1, x2, y2) {
@@ -93,7 +95,7 @@ function changeColor(newColor) {
 }
 
 function clearCanvas() {
-    canvas.clearRect(0, 0, c.width, c.height); // Clear the entire canvas
+    canvas.clearRect(0, 0, c.width, c.height); 
 }
 
 window.addEventListener("load", draw);
