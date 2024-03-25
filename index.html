@@ -12,7 +12,10 @@
         <div id="canvas-ctn">
             <canvas id="canvas" style="border:1px solid #000000;"></canvas>
         </div>
-        <button id="clear-btn" onclick="clearCanvas()">Clear</button>
+        <div id="controls">
+            <button id="clear-btn" onclick="clearCanvas()">Clear</button>
+            <button id="undo-btn" onclick="clearCanvas()">Undo</button>
+        </div>
         <div id="color">
             <button id="black" onclick="changeColor('black')"></button>
             <button id="blue" onclick="changeColor('blue')"></button>

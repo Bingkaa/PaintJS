@@ -21,15 +21,21 @@ function setCanvasSize() {
     c.height = window.innerHeight * 0.6; // Adjust as needed
 }
 
+// Function to handle touch start
+function handleTouchStart(event) {
+    event.preventDefault(); // Prevent default touch behavior
+    startDrawing(event.touches[0]); // Pass the first touch event to startDrawing function
+}
+
 // Draw on Canvas
 function draw() {
     setCanvasSize(); // Set initial canvas size
     window.addEventListener("resize", setCanvasSize); // Update canvas size on window resize
 
     c.addEventListener("mousedown", startDrawing);
-    c.addEventListener("touchstart", startDrawing);
+    c.addEventListener("touchstart", handleTouchStart, { passive: false }); // Prevent default touch behavior
     c.addEventListener("mousemove", brush);
-    c.addEventListener("touchmove", brush);
+    c.addEventListener("touchmove", brush, { passive: false }); // Prevent default touch behavior
     c.addEventListener("mouseup", endDrawing);
     c.addEventListener("touchend", endDrawing);
 }

@@ -11,13 +11,33 @@ canvas {
     text-align: center;
 }
 
+#color {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 #color > button {
     height: 50px;
     width: 50px;
     border-radius: 100px;
+    margin: 5px;
     border: none;
 }
 
 #color > button.active {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#controls > button {
+    width: 200px;
+    height: 50px;
+    border-radius: 50px;
+    border: none;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.2);
+    margin: 20px;
 }
